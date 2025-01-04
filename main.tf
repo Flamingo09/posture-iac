@@ -3,7 +3,7 @@ provider "google" {
   region  = "global"
 }
 
-resource "google_storage_bucket" "good_bucket" {
+resource "google_storage_bucket" "good_bucket_1" {
   name          = "good_bucket"
   location      = "EU"
   force_destroy = true
