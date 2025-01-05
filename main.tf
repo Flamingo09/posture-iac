@@ -1,27 +1,27 @@
 provider "google" {
-  project = "terraform-cloud-445206-1"
+  project = "terraform-cloud-445206"
   region  = "global"
 }
 
-module "gcp_org_policy_v2" {
- source           = "terraform-google-modules/org-policy/google//modules/org_policy_v2"
-
- policy_root      = "organization"
- policy_root_id   = "34857634875"
- constraint       = "iam.disableServiceAccountKeyUpload"
- policy_type      = "boolean"
- exclude_folders  = []
- exclude_projects = []
-
-
- rules = [
-   # Rule 1
-   {
-    // Modification(enforcement - false ->true).
-     enforcement = true
-     allow       = []
-     deny        = []
-     conditions  = []
-   },
- ]
+resource "google_securityposture_posture" "posture_2" {
+  posture_id  = "posture_2"
+  parent      = "organizations/ewir7yi78437"
+  location    = "global"
+  state       = "ACTIVE"
+  description = "a new posture"
+  policy_sets {
+      policy_set_id = "org_policy_set"
+      description   = "set of org policies"
+      policies {
+          policy_id = "policy_1"
+          constraint {
+              org_policy_constraint {
+                  canned_constraint_id = "storage.uniformBucketLevelAccess"
+                  policy_rules {
+                      enforce = true
+                  }
+              }
+          }
+      }
+  }
 }
