@@ -5945,7 +5945,7 @@ resource "google_compute_network" "network999"{
   auto_create_subnetworks           = false
   routing_mode                      = "REGIONAL"
   mtu = 1301
-  project = "terraform-cloud-445206"̱
+  project = "terraform-cloud-445206"
 }
 
 resource "google_compute_network" "network1001kjsq"{
