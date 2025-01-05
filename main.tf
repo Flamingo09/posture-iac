@@ -41,7 +41,7 @@ resource "google_storage_bucket" "akanksha_tf_testing_1" {
   }
 }
 
-resource "google_container_node_pool" "primary_node_pool" {
+resource "google_container_node_pool" "primary_node_pool_1" {
   name       = "primary-node-pool-1"
   cluster    = "cluster-1"
   project    = "terraform-cloud-445206"
