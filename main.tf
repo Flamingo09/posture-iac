@@ -21,3 +21,5 @@ resource "google_storage_bucket" "good_bucket" {
     max_age_seconds = 3600
   }
 }
+
+
