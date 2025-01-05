@@ -12,7 +12,7 @@ resource "google_storage_bucket" "akanksha_tf_testing" {
 
   website {
     main_page_suffix = "index.html"
-    not_found_page   = "404.html"
+    not_found_page   = "404.html" 
   }
   cors {
     origin          = ["http://image-store.com"]
