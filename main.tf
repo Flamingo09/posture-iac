@@ -4,7 +4,7 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "akanksha_tf_testing" {
-  name          = "akanksha_tf_testing"
+  name          = "new_akanksha_tf_testing"
   location      = "EU"
   force_destroy = true
 
