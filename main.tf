@@ -21,5 +21,3 @@ resource "google_storage_bucket" "akanksha_tf_testing" {
     max_age_seconds = 3600
   }
 }
-
-
