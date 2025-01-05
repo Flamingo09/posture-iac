@@ -3,52 +3,38 @@ provider "google" {
   region  = "global"
 }
 
-resource "google_storage_bucket" "akanksha_tf_testing" {
-  name          = "new_akanksha_tf_testing"
-  location      = "EU"
-  force_destroy = true
+module "gcp_org_policy_v2" {
+ source           = "terraform-google-modules/org-policy/google//modules/org_policy_v2"
 
-  uniform_bucket_level_access = false
+ policy_root      = "organization"
+ policy_root_id   = "9454078371"
+ constraint       = "iam.disableServiceAccountKeyUpload"
+ policy_type      = "boolean"
+ exclude_folders  = []
+ exclude_projects = []
 
-  website {
-    main_page_suffix = "index.html"
-    not_found_page   = "404.html" 
-  }
-  cors {
-    origin          = ["http://image-store.com"]
-    method          = ["GET", "HEAD", "PUT", "POST", "DELETE"]
-    response_header = ["*"]
-    max_age_seconds = 3600
-  }
+
+ rules = [
+   # Rule 1
+   {
+    // Modification(enforcement - false ->true).
+     enforcement = true
+     allow       = []
+     deny        = []
+     conditions  = []
+   },
+ ]
 }
 
-resource "google_storage_bucket" "akanksha_tf_testing_1" {
-  name          = "akanksha_tf_testing_1"
-  location      = "EU"
-  force_destroy = true
 
-  uniform_bucket_level_access = false
+resource "google_org_policy_policy" "primary" {
+ name   = "projects/302158293184/policies/compute.requireOsLogin"
+ parent = "projects/302158293184"
 
-  website {
-    main_page_suffix = "index.html"
-    not_found_page   = "404.html"
-  }
-  cors {
-    origin          = ["http://image-store.com"]
-    method          = ["GET", "HEAD", "PUT", "POST", "DELETE"]
-    response_header = ["*"]
-    max_age_seconds = 3600
-  }
-}
 
-resource "google_container_node_pool" "primary_node_pool_1" {
-  name       = "primary-node-pool-1"
-  cluster    = "cluster-1"
-  project    = "terraform-cloud-445206"
-  initial_node_count = 2
-
-  node_config {
-    preemptible  = true
-    machine_type = "e2-medium"
-  }
+ spec {
+   rules {
+     enforce = "FALSE"
+   }
+ }
 }
