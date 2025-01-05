@@ -40,3 +40,15 @@ resource "google_storage_bucket" "akanksha_tf_testing_1" {
     max_age_seconds = 3600
   }
 }
+
+resource "google_container_node_pool" "primary_node_pool" {
+  name       = "primary-node-pool-1"
+  cluster    = "cluster-1"
+  project = "conductive-ward-411007"
+  initial_node_count = 2
+
+  node_config {
+    preemptible  = true
+    machine_type = "e2-medium"
+  }
+}
